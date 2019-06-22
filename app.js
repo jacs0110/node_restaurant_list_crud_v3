@@ -36,7 +36,7 @@ app.use(bodyPaser.urlencoded({ extended: true }))
 app.get('/', (req, res) => {
   restaurantList.find((err, restaurants) => {
     if (err) return console.error(err)
-    res.render('index', { restaurants: restaurants, categories: categories })
+    res.render('index', { restaurants: restaurants })
   })
 })
 
@@ -112,6 +112,18 @@ app.post('/restaurant/:id/delete', (req, res) => {
       if (err) console.error(err)
       res.redirect(`/`)
     })
+  })
+})
+
+// search function
+app.get('/search', (req, res) => {
+  restaurantList.find((err, restaurants) => {
+    const keyword = req.query.keyword
+    if (err) return console.error(err)
+    const restaurantResults = restaurants.filter(({ name, category }) => {
+      return (category.toLowerCase().includes(keyword.toLowerCase()) || name.toLowerCase().includes(keyword.toLowerCase()))
+    })
+    res.render('index', { restaurants: restaurantResults, keyword: keyword })
   })
 })
 

@@ -8,6 +8,7 @@ This is a web appliaction built by Node.js, Express.js, and Mongoose with basic 
 3. User can create new restaurant
 4. User can edit restaurant info
 5. User can delete a restaurant
+6. User can search restaurants
 
 ---
 ### Getting Started
