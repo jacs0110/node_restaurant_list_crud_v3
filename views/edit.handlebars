@@ -1,0 +1,48 @@
+<div class="container mt-5">
+  <h4 class="mb-2">Update restaurant information</h4>
+  <div class="row">
+    <form action="/restaurant/{{{restaurant._id}}}" method="POST">
+      <div class="form-group">
+        <label for="exampleFormControlInput1">Name</label>
+        <input type="text" name="name" class="form-control" id="exampleFormControlInput1" value="{{{restaurant.name}}}">
+      </div>
+      <div class="form-group">
+        <label for="exampleFormControlInput1">English Name</label>
+        <input type="text" name="name_en" class="form-control" id="exampleFormControlInput1"
+          value="{{{restaurant.name_en}}}">
+      </div>
+      <div class="form-group">
+        <label for="exampleFormControlInput1">Category</label>
+        <input type="text" name="category" class="form-control" id="exampleFormControlInput1"
+          value="{{{restaurant.category}}}">
+      </div>
+      <div class="form-group">
+        <label for="exampleFormControlInput1">Image</label>
+        <input type="text" name="image" class="form-control" id="exampleFormControlInput1"
+          value="{{{restaurant.image}}}">
+      </div>
+      <div class="form-group">
+        <label for="exampleFormControlInput1">Location</label>
+        <input type="text" name="location" class="form-control" id="exampleFormControlInput1"
+          value="{{{restaurant.location}}}">
+      </div>
+      <div class="form-group">
+        <label for="exampleFormControlInput1">Google Map</label>
+        <input type="text" name="google_map" class="form-control" id="exampleFormControlInput1"
+          value="{{{restaurant.google_map}}}">
+      </div>
+      <div class="form-group">
+        <label for="exampleFormControlInput1">Rating</label>
+        <input type="text" name="rating" class="form-control" id="exampleFormControlInput1"
+          value="{{{restaurant.rating}}}">
+      </div>
+
+      <div class="form-group">
+        <label for="exampleFormControlTextarea1">Description</label>
+        <textarea name="description" class="form-control" id="exampleFormControlTextarea1"
+          rows="3">{{{restaurant.description}}}</textarea>
+      </div>
+      <button type="submit" class="btn btn-outline-success">Update</button>
+    </form>
+  </div>
+</div>
