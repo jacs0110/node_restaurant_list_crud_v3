@@ -7,7 +7,13 @@ const restaurantList = require('../models/restaurantList.js')
 router.get('/', (req, res) => {
   restaurantList.find((err, restaurants) => {
     if (err) return console.error(err)
-    res.render('index', { restaurants: restaurants })
+    let result = []
+    restaurants.forEach(e => {
+      result.push(e.category)
+    })
+    categories = [...new Set(result)]
+    console.log(categories)
+    res.render('index', { restaurants: restaurants, categories: categories })
   })
 })
 
@@ -95,6 +101,47 @@ router.delete('/:id/delete', (req, res) => {
       if (err) console.error(err)
       res.redirect(`/`)
     })
+  })
+})
+
+router.get('/category/:category', (req, res) => {
+  restaurantList.find((err, restaurants) => {
+    const keyword = req.params.category
+    if (err) return console.error(err)
+    const restaurantResults = restaurants.filter(({ name, category }) => {
+      return (category.toLowerCase().includes(keyword.toLowerCase()))
+    })
+    res.render('index', { restaurants: restaurantResults })
+  })
+})
+
+
+router.get('/sort/:condition', (req, res) => {
+  let keyword = req.params
+  let choice = {}
+  switch (keyword.condition) {
+    case 'nameasc':
+      choice = { name_en: 'asc' }
+      break;
+    case 'namedesc':
+      choice = { name_en: 'desc' }
+      break;
+    case 'category':
+      choice = { category: 'asc' }
+      break;
+    case 'location':
+      choice = { location: 'asc' }
+      break;
+    default:
+  }
+  restaurantList.find({}).sort(choice).exec((err, restaurants) => {
+    if (err) return console.error(err)
+    let result = []
+    restaurants.forEach(e => {
+      result.push(e.category)
+    })
+    categories = [...new Set(result)]
+    return res.render('index', { restaurants: restaurants, categories: categories })
   })
 })
 

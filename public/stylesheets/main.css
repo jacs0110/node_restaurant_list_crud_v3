@@ -11,7 +11,29 @@ header {
 
 #create-button {
   margin: 20px 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
 }
+
+.create-new-restaurant-button{
+  height: 50px;
+}
+
+.sort-restaurant{
+  height: 50px;
+  margin: 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.sort-restaurant span{
+  width: 200px;
+}
+
 .navbar .navbar-brand {
   color: #4592af;
 }

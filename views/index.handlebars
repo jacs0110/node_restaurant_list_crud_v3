@@ -15,20 +15,32 @@
     </div>
   </div>
 </div>
-<!-- nav bar -->
-{{!-- <ul class="nav justify-content-center">
+<ul class="nav justify-content-center">
   {{#each categories}}
   <li class="nav-item">
-    <a class="nav-link active" href="/category/{{this}}">{{this}}</a>
+    <a class="nav-link active" href="/restaurants/category/{{this}}">{{this}}</a>
   </li>
   {{/each}}
-</ul> --}}
+</ul>
 
 <!-- restaurant list -->
 <div class="container mt-5">
-  <div class="row justify-content-md-center" id="create-button">
-    <button type="button" class="btn btn-outline-success" onclick="window.location.href='/restaurants/new'">Add new
+  <div class="row" id="create-button">
+    <button type="button" class="btn btn-outline-success create-new-restaurant-button"
+      onclick="window.location.href='/restaurants/new'">Add new
       restaurant</button>
+    <form>
+      <div class="form-group sort-restaurant">
+        <span for="exampleFormControlSelect1">Sort by: </span>
+        <select class="form-control" id="choose" onchange="TheConfirmBox()">
+          <option value="/restaurants"> </option>
+          <option value="/restaurants/sort/nameasc">Name (A to Z)</option>
+          <option value="/restaurants/sort/namedec">Name (Z to A)</option>
+          <option value="/restaurants/sort/category">Category</option>
+          <option value="/restaurants/sort/location">Location</option>
+        </select>
+      </div>
+    </form>
   </div>
   <div class="row">
     <div class="col-md-10 col-12 mx-auto">
@@ -63,3 +75,12 @@
     </div>
   </div>
 </div>
+
+<script>
+  function TheConfirmBox() {
+    let noteToMe;
+    /*取得id為choose的選單裡剛剛所點擊的連結的名稱*/
+    let whichUserChoose = choose.options[choose.selectedIndex].text;
+    window.open(choose.options[choose.selectedIndex].value, "_self");
+  }
+</script>
