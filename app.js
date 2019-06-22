@@ -36,7 +36,7 @@ app.use(bodyPaser.urlencoded({ extended: true }))
 app.get('/', (req, res) => {
   restaurantList.find((err, restaurants) => {
     if (err) return console.error(err)
-    res.render('index', { restaurants: restaurants })
+    res.render('index', { restaurants: restaurants, categories: categories })
   })
 })
 
