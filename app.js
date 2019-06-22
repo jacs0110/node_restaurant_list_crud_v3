@@ -39,11 +39,38 @@ app.get('/', (req, res) => {
   })
 })
 
-app.get('/show/:id', (req, res) => {
+app.get('/restaurant/:id', (req, res) => {
   restaurantList.findById(req.params.id, (err, restaurant) => {
     if (err) console.error(err)
     res.render('show', { restaurant: restaurant })
   })
+})
+
+app.get('/restaurants/new', (req, res) => {
+  console.log('create a new item')
+  res.render('new')
+})
+
+// create a new todo
+app.post('/restaurants', (req, res) => {
+  console.log(req.body)
+  const newRestaurant = restaurantList({
+    name: req.body.name,
+    name_en: req.body.name_en,
+    category: req.body.category,
+    image: req.body.image,
+    location: req.body.location,
+    phone: req.body.phone,
+    google_map: req.body.google_map,
+    rating: req.body.rating,
+    description: req.body.description
+  })
+
+  newRestaurant.save(err => {
+    if (err) console.error(err)
+    res.redirect('/')
+  })
+
 })
 
 // listening on localhost 
