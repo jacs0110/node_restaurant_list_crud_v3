@@ -132,8 +132,12 @@ router.get('/sort/:condition', (req, res) => {
     case 'location':
       choice = { location: 'asc' }
       break;
+    case 'rating':
+      choice = { rating: 'desc' }
+      break;
     default:
   }
+  console.log(choice)
   restaurantList.find({}).sort(choice).exec((err, restaurants) => {
     if (err) return console.error(err)
     let result = []
@@ -141,6 +145,15 @@ router.get('/sort/:condition', (req, res) => {
       result.push(e.category)
     })
     categories = [...new Set(result)]
+
+    // check sorting feature
+    let list = []
+    restaurants.forEach(e => {
+      list.push(e.rating)
+    })
+
+    console.log(list)
+
     return res.render('index', { restaurants: restaurants, categories: categories })
   })
 })
