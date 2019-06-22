@@ -104,6 +104,17 @@ app.post('/restaurant/:id', (req, res) => {
   })
 })
 
+// Delete a restaurant
+app.post('/restaurant/:id/delete', (req, res) => {
+  restaurantList.findById(req.params.id, (err, todo) => {
+    if (err) console.error(err)
+    todo.remove(err => {
+      if (err) console.error(err)
+      res.redirect(`/`)
+    })
+  })
+})
+
 // listening on localhost 
 app.listen(port, () => {
   console.log(`Listening on http://localhost:${port}...`)

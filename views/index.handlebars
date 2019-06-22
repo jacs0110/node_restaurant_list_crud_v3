@@ -26,8 +26,9 @@
 
 <!-- restaurant list -->
 <div class="container mt-5">
-  <div class="row justify-content-md-center">
-    <a href="/restaurants/new">Add</a>
+  <div class="row justify-content-md-center create-button">
+    <button type="button" class="btn btn-outline-success" onclick="window.location.href='/restaurants/new'">Add new
+      restaurant</button>
   </div>
   <div class="row">
     <div class="col-md-10 col-12 mx-auto">
@@ -48,13 +49,10 @@
                 <i class="fas fa-star fa-xs"></i>
               </span>
               <div class="actions_constainer">
-                <button type="button" class="btn btn-outline-primary btn-sm"
-                  href="/restaurant/{{this._id}}">Show</button>
-                <button type="button" class="btn btn-outline-primary btn-sm"
-                  href="/restaurant/{{this._id}}/edit">Edit</button>
+                <a href="/restaurant/{{this._id}}">Show</a>
                 <a href="/restaurant/{{this._id}}/edit">Edit</a>
                 <form action="/restaurant/{{this._id}}/delete" method="POST" style="display: inline;">
-                  <button type="Submit" class="btn btn-outline-danger btn-sm">Delete</button>
+                  <button type="Submit" class="btn btn-outline-danger btn-sm" onclick="myFunction()">Delete</button>
                 </form>
               </div>
             </div>
