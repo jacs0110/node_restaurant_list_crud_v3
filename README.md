@@ -1,14 +1,20 @@
 ## 我的餐廳清單
 
-This is a web appliaction built by Node.js, Express.js, and Mongoose with basic CRUD functions 
+This is a web appliaction built by Node.js, Express.js, and Mongoose with basic CRUD functions. 
 
-### Key features
+Based on [the first app I built last time](https://github.com/jacs0110/node_restaurant_list_crud), I update route by using express routers, and also build sorting function for this app 
+
+### Basic features
 1. User can see all restaurants in the index page
 2. User can click indivisual restaurant and view more information
 3. User can create new restaurant
 4. User can edit restaurant info
 5. User can delete a restaurant
 6. User can search restaurants
+
+### New features in this version
+7. User can select the restaurant list of specific category
+8. User can sort restaurants by rating, name (asc, desc), category, location
 
 ---
 ### Getting Started
