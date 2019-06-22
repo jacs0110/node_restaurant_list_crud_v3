@@ -2,6 +2,16 @@ header {
   overflow: hidden;
 }
 
+.actions_constainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-top: 10px;
+}
+
+#create-button {
+  margin: 20px 0px;
+}
 .navbar .navbar-brand {
   color: #4592af;
 }

@@ -5,39 +5,42 @@
       <div class="form-group">
         <label for="exampleFormControlInput1">Name</label>
         <input type="text" name="name" class="form-control" id="exampleFormControlInput1"
-          placeholder="Restaurant's name">
+          placeholder="Restaurant's name" required>
       </div>
       <div class="form-group">
         <label for="exampleFormControlInput1">English Name</label>
         <input type="text" name="name_en" class="form-control" id="exampleFormControlInput1"
-          placeholder="Restaurant's English name">
+          placeholder="Restaurant's English name" required>
       </div>
       <div class="form-group">
         <label for="exampleFormControlInput1">Category</label>
-        <input type="text" name="category" class="form-control" id="exampleFormControlInput1" placeholder="Category">
+        <input type="text" name="category" class="form-control" id="exampleFormControlInput1" placeholder="Category"
+          required>
       </div>
       <div class="form-group">
         <label for="exampleFormControlInput1">Image</label>
         <input type="text" name="image" class="form-control" id="exampleFormControlInput1"
-          placeholder="Please upload imgae link here">
+          placeholder="Please upload imgae link here" required>
       </div>
       <div class="form-group">
         <label for="exampleFormControlInput1">Location</label>
-        <input type="text" name="location" class="form-control" id="exampleFormControlInput1" placeholder="Location">
+        <input type="text" name="location" class="form-control" id="exampleFormControlInput1" placeholder="Location"
+          required>
       </div>
       <div class="form-group">
         <label for="exampleFormControlInput1">Google Map</label>
         <input type="text" name="google_map" class="form-control" id="exampleFormControlInput1"
-          placeholder="Please upload Google map link here">
+          placeholder="Please upload Google map link here" required>
       </div>
       <div class="form-group">
         <label for="exampleFormControlInput1">Rating</label>
-        <input type="text" name="rating" class="form-control" id="exampleFormControlInput1" placeholder="Rating">
+        <input type="number" name="rating" class="form-control" id="exampleFormControlInput1" placeholder="Rating"
+          min="1" max="5" required>
       </div>
 
       <div class="form-group">
         <label for="exampleFormControlTextarea1">Description</label>
-        <textarea name="description" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        <textarea name="description" class="form-control" id="exampleFormControlTextarea1" rows="3" required></textarea>
       </div>
       <button type="submit" class="btn btn-outline-success">Create</button>
       <a href="/">Back to main page</a>
