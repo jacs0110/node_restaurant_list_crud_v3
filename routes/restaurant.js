@@ -6,7 +6,7 @@ const { authenticated } = require('../config/auth')
 // routes
 // Go to index page
 router.get('/', authenticated, (req, res) => {
-  restaurantList.find((err, restaurants) => {
+  restaurantList.find({ userId: req.user._id }, (err, restaurants) => {
     if (err) return console.error(err)
     let result = []
     restaurants.forEach(e => {
@@ -38,7 +38,7 @@ router.get('/search', authenticated, (req, res) => {
 
 // Go to show page
 router.get('/:id', authenticated, (req, res) => {
-  restaurantList.findById(req.params.id, (err, restaurant) => {
+  restaurantList.findOne({ _id: req.params.id, userId: req.user._id }, (err, restaurant) => {
     if (err) return console.error(err)
     res.render('show', { restaurant: restaurant })
   })
@@ -56,7 +56,8 @@ router.post('/', authenticated, (req, res) => {
     phone: req.body.phone,
     google_map: req.body.google_map,
     rating: req.body.rating,
-    description: req.body.description
+    description: req.body.description,
+    userId: req.user._id
   })
 
   newRestaurant.save(err => {
@@ -67,7 +68,7 @@ router.post('/', authenticated, (req, res) => {
 
 // Go to edit page
 router.get('/:id/edit', authenticated, (req, res) => {
-  restaurantList.findById(req.params.id, (err, restaurant) => {
+  restaurantList.findOne({ _id: req.params.id, userId: req.user._id }, (err, restaurant) => {
     if (err) return console.error(err)
     res.render('edit', { restaurant: restaurant })
   })
@@ -75,7 +76,7 @@ router.get('/:id/edit', authenticated, (req, res) => {
 
 // Edit a restaurant info
 router.put('/:id', authenticated, (req, res) => {
-  restaurantList.findById(req.params.id, (err, restaurant) => {
+  restaurantList.findOne({ _id: req.params.id, userId: req.user._id }, (err, restaurant) => {
     if (err) return console.error(err)
     restaurant.name = req.body.name
     restaurant.name_en = req.body.name_en
@@ -96,7 +97,7 @@ router.put('/:id', authenticated, (req, res) => {
 
 // Delete a restaurant
 router.delete('/:id/delete', authenticated, (req, res) => {
-  restaurantList.findById(req.params.id, (err, todo) => {
+  restaurantList.findOne({ _id: req.params.id, userId: req.user._id }, (err, todo) => {
     if (err) return console.error(err)
     todo.remove(err => {
       if (err) return console.error(err)
@@ -106,7 +107,7 @@ router.delete('/:id/delete', authenticated, (req, res) => {
 })
 
 router.get('/category/:category', authenticated, (req, res) => {
-  restaurantList.find((err, restaurants) => {
+  restaurantList.find({ userId: req.user._id }, (err, restaurants) => {
     const keyword = req.params.category
     if (err) return console.error(err)
     const restaurantResults = restaurants.filter(({ name, category }) => {
