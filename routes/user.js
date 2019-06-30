@@ -7,14 +7,18 @@ const bcrypt = require('bcryptjs')
 
 // login
 router.get('/login', (req, res) => {
-  res.render('login')
+  const message = []
+  message.push(req.session.messages)
+  showMessage = message[0][0]
+  res.render('login', { login_errors: showMessage || [] })
 })
 
 // login check
 router.post('/login', (req, res, next) => {
   passport.authenticate('local', {
     successRedirect: '/',
-    failureRedirect: '/users/login'
+    failureRedirect: '/users/login',
+    failureMessage: 'Invalid username or password',
   })(req, res, next)
 })
 
@@ -24,18 +28,16 @@ router.get('/register', (req, res) => {
 })
 
 // register check
-router.post('/register', (req, res) => {
+router.post('/register', (req, res, next) => {
   const { name, email, password, password2 } = req.body
   let errors = []
 
-  if (!name || !email || !password || !password2) {
-    errors.push({ message: 'All fields are required' })
+  if (!email || !password || !password2) {
+    errors.push({ message: 'Email and password are required' })
   }
-
   // if (password !== password2) {
   //   errors.push({ message: 'Passwords are not consistent' })
   // }
-
 
   if (errors.length > 0) {
     res.render('register', {
@@ -79,7 +81,12 @@ router.post('/register', (req, res) => {
             if (err) throw err
             newUser.password = hash
             newUser.save().then(user => {
-              res.redirect('/')
+              req.login(user, function (err) {
+                if (err) {
+                  console.log(err);
+                }
+                return res.redirect('/');
+              });
             }).catch(
               err => console.log(err)
             )
@@ -88,7 +95,6 @@ router.post('/register', (req, res) => {
       }
     })
   }
-
 })
 
 // logout

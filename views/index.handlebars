@@ -25,6 +25,9 @@
 
 <!-- restaurant list -->
 <div class="container mt-5">
+  <div class="welcome-message">
+    <p class="text-center font-weight-bold text-primary h4">{{#if user.name}}{{user.name}},{{/if}} welcome back!</p>
+  </div>
   <div class="row" id="create-button">
     <button type="button" class="btn btn-outline-success create-new-restaurant-button"
       onclick="window.location.href='/restaurants/new'">Add new

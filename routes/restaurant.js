@@ -148,14 +148,6 @@ router.get('/sort/:condition', authenticated, (req, res) => {
     })
     categories = [...new Set(result)]
 
-    // check sorting feature
-    let list = []
-    restaurants.forEach(e => {
-      list.push(e.rating)
-    })
-
-    console.log(list)
-
     return res.render('index', { restaurants: restaurants, categories: categories })
   })
 })

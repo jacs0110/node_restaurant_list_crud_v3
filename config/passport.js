@@ -40,7 +40,7 @@ module.exports = passport => {
       profileFields: ['email', 'displayName']
     }, (accessToken, refreshToken, profile, done) => {
       User.findOne({
-        email: profile_json.email
+        email: profile._json.email
       }).then(user => {
         if (!user) {
           let randomPassword = Math.random().toString(36).slice(-8)
