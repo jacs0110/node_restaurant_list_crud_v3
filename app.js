@@ -33,6 +33,7 @@ const restaurantList = require('./models/restaurantList.js')
 
 // routes 
 app.use('/', require('./routes/home.js'))
+app.use('/users', require('./routes/user.js'))
 app.use('/restaurants', require('./routes/restaurant.js'))
 
 // listening on localhost 
