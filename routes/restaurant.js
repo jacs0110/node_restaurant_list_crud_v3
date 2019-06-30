@@ -38,7 +38,7 @@ router.get('/search', (req, res) => {
 // Go to show page
 router.get('/:id', (req, res) => {
   restaurantList.findById(req.params.id, (err, restaurant) => {
-    if (err) console.error(err)
+    if (err) return console.error(err)
     res.render('show', { restaurant: restaurant })
   })
 })
@@ -59,7 +59,7 @@ router.post('/', (req, res) => {
   })
 
   newRestaurant.save(err => {
-    if (err) console.error(err)
+    if (err) return console.error(err)
     res.redirect('/')
   })
 })
@@ -67,7 +67,7 @@ router.post('/', (req, res) => {
 // Go to edit page
 router.get('/:id/edit', (req, res) => {
   restaurantList.findById(req.params.id, (err, restaurant) => {
-    if (err) console.error(err)
+    if (err) return console.error(err)
     res.render('edit', { restaurant: restaurant })
   })
 })
@@ -75,7 +75,7 @@ router.get('/:id/edit', (req, res) => {
 // Edit a restaurant info
 router.put('/:id', (req, res) => {
   restaurantList.findById(req.params.id, (err, restaurant) => {
-    if (err) console.error(err)
+    if (err) return console.error(err)
     restaurant.name = req.body.name
     restaurant.name_en = req.body.name_en
     restaurant.category = req.body.category
@@ -87,7 +87,7 @@ router.put('/:id', (req, res) => {
     restaurant.description = req.body.description
 
     restaurant.save(err => {
-      if (err) console.error(err)
+      if (err) return console.error(err)
       res.redirect(`/restaurants/${req.params.id}`)
     })
   })
@@ -96,9 +96,9 @@ router.put('/:id', (req, res) => {
 // Delete a restaurant
 router.delete('/:id/delete', (req, res) => {
   restaurantList.findById(req.params.id, (err, todo) => {
-    if (err) console.error(err)
+    if (err) return console.error(err)
     todo.remove(err => {
-      if (err) console.error(err)
+      if (err) return console.error(err)
       res.redirect(`/`)
     })
   })
