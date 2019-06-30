@@ -9,6 +9,10 @@ const session = require('express-session')
 const passport = require('passport')
 const port = 3000
 
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
+
 // setup the app
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
@@ -51,6 +55,7 @@ const restaurantList = require('./models/restaurantList.js')
 
 // routes 
 app.use('/', require('./routes/home.js'))
+app.use('/auth', require('./routes/auths.js'))
 app.use('/users', require('./routes/user.js'))
 app.use('/restaurants', require('./routes/restaurant.js'))
 
