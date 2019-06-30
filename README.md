@@ -1,5 +1,7 @@
 ## 我的餐廳清單
 
+![](https://assets-lighthouse.s3.amazonaws.com/uploads/answer/cover/99623/medium_2019-06-30_at_10.54_PM.gif)
+
 This is a web appliaction built by Node.js, Express.js, and Mongoose with basic CRUD functions. 
 
 Based on [the the app I built last time](https://github.com/jacs0110/node_restaurant_list_crud_v2), I mainly update authentication and authorization by using passport (local and facebook strategy), bcrypt, express-session, connect-flash, and dotenv.
