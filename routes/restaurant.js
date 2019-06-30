@@ -1,10 +1,11 @@
 const express = require('express')
 const router = express.Router()
 const restaurantList = require('../models/restaurantList.js')
+const { authenticated } = require('../config/auth')
 
 // routes
 // Go to index page
-router.get('/', (req, res) => {
+router.get('/', authenticated, (req, res) => {
   restaurantList.find((err, restaurants) => {
     if (err) return console.error(err)
     let result = []
@@ -12,19 +13,19 @@ router.get('/', (req, res) => {
       result.push(e.category)
     })
     categories = [...new Set(result)]
-    console.log(categories)
+    // console.log(categories)
     res.render('index', { restaurants: restaurants, categories: categories })
   })
 })
 
 // Go to creating a new restaurant page
-router.get('/new', (req, res) => {
+router.get('/new', authenticated, (req, res) => {
   console.log('create a new item')
   res.render('new')
 })
 
 // search function
-router.get('/search', (req, res) => {
+router.get('/search', authenticated, (req, res) => {
   restaurantList.find((err, restaurants) => {
     const keyword = req.query.keyword
     if (err) return console.error(err)
@@ -36,7 +37,7 @@ router.get('/search', (req, res) => {
 })
 
 // Go to show page
-router.get('/:id', (req, res) => {
+router.get('/:id', authenticated, (req, res) => {
   restaurantList.findById(req.params.id, (err, restaurant) => {
     if (err) return console.error(err)
     res.render('show', { restaurant: restaurant })
@@ -44,7 +45,7 @@ router.get('/:id', (req, res) => {
 })
 
 // create a new restaurant
-router.post('/', (req, res) => {
+router.post('/', authenticated, (req, res) => {
   // console.log(req.body)
   const newRestaurant = restaurantList({
     name: req.body.name,
@@ -65,7 +66,7 @@ router.post('/', (req, res) => {
 })
 
 // Go to edit page
-router.get('/:id/edit', (req, res) => {
+router.get('/:id/edit', authenticated, (req, res) => {
   restaurantList.findById(req.params.id, (err, restaurant) => {
     if (err) return console.error(err)
     res.render('edit', { restaurant: restaurant })
@@ -73,7 +74,7 @@ router.get('/:id/edit', (req, res) => {
 })
 
 // Edit a restaurant info
-router.put('/:id', (req, res) => {
+router.put('/:id', authenticated, (req, res) => {
   restaurantList.findById(req.params.id, (err, restaurant) => {
     if (err) return console.error(err)
     restaurant.name = req.body.name
@@ -94,7 +95,7 @@ router.put('/:id', (req, res) => {
 })
 
 // Delete a restaurant
-router.delete('/:id/delete', (req, res) => {
+router.delete('/:id/delete', authenticated, (req, res) => {
   restaurantList.findById(req.params.id, (err, todo) => {
     if (err) return console.error(err)
     todo.remove(err => {
@@ -104,7 +105,7 @@ router.delete('/:id/delete', (req, res) => {
   })
 })
 
-router.get('/category/:category', (req, res) => {
+router.get('/category/:category', authenticated, (req, res) => {
   restaurantList.find((err, restaurants) => {
     const keyword = req.params.category
     if (err) return console.error(err)
@@ -116,7 +117,7 @@ router.get('/category/:category', (req, res) => {
 })
 
 
-router.get('/sort/:condition', (req, res) => {
+router.get('/sort/:condition', authenticated, (req, res) => {
   let keyword = req.params
   let choice = {}
   switch (keyword.condition) {
