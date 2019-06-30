@@ -16,7 +16,9 @@ app.use(methodOverride('_method'))
 app.use(bodyPaser.urlencoded({ extended: true }))
 
 app.use(session({
-  secret: 'akpitdx'
+  secret: 'akpitdx',
+  resave: 'false',
+  saveUninitialized: 'false'
 }))
 
 app.use(passport.initialize())
@@ -33,7 +35,7 @@ app.use((req, res, next) => {
 app.use(express.static('public'))
 
 // connect to local db
-mongoose.connect('mongodb://localhost/restaurantListDB', { useNewUrlParser: true })
+mongoose.connect('mongodb://localhost/restaurantListDB', { useNewUrlParser: true, useCreateIndex: true })
 const db = mongoose.connection
 
 db.on('error', () => {

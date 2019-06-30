@@ -26,7 +26,7 @@ router.get('/new', authenticated, (req, res) => {
 
 // search function
 router.get('/search', authenticated, (req, res) => {
-  restaurantList.find((err, restaurants) => {
+  restaurantList.find({ userId: req.user._id }, (err, restaurants) => {
     const keyword = req.query.keyword
     if (err) return console.error(err)
     const restaurantResults = restaurants.filter(({ name, category }) => {
@@ -140,7 +140,7 @@ router.get('/sort/:condition', authenticated, (req, res) => {
     default:
   }
   console.log(choice)
-  restaurantList.find({}).sort(choice).exec((err, restaurants) => {
+  restaurantList.find({ userId: req.user._id }).sort(choice).exec((err, restaurants) => {
     if (err) return console.error(err)
     let result = []
     restaurants.forEach(e => {
