@@ -2,7 +2,13 @@
 
 This is a web appliaction built by Node.js, Express.js, and Mongoose with basic CRUD functions. 
 
-Based on [the first app I built last time](https://github.com/jacs0110/node_restaurant_list_crud), I update route by using express routers, and also build sorting function for this app 
+Based on [the the app I built last time](https://github.com/jacs0110/node_restaurant_list_crud_v2), I mainly update authentication and authorization by using passport (local and facebook strategy), bcrypt, express-session, connect-flash, and dotenv.
+
+### New features in this version
+1. User can register a new account for this app
+2. User can use facebook to login this app
+3. User can only see/edit/delete the data that belong to him/her
+4. User can see the notifiaction if there is an erron when registing a new account or login
 
 ### Basic features
 1. User can see all restaurants in the index page
@@ -11,8 +17,6 @@ Based on [the first app I built last time](https://github.com/jacs0110/node_rest
 4. User can edit restaurant info
 5. User can delete a restaurant
 6. User can search restaurants
-
-### New features in this version
 7. User can select the restaurant list of specific category
 8. User can sort restaurants by rating, name (asc, desc), category, location
 
@@ -26,7 +30,7 @@ Based on [the first app I built last time](https://github.com/jacs0110/node_rest
 
 #### Clone this project
 ```
-$ git clone https://github.com/jacs0110/node_restaurant_list_crud.git
+$ git clone https://github.com/jacs0110/node_restaurant_list_crud_v3.git
 ```
 #### Setup
 0. Create a local database "restaurantListDB" on MongoDB
@@ -42,7 +46,11 @@ $ npm install
 ```
 $ cd models/seeds
 ```
-     
+
+```
+$ node userSeeder.js 
+```
+(note: need to run user.Seeder.js before restaurantSeeder.js)
 ```
 $ node restaurantSeeder.js 
 ```
