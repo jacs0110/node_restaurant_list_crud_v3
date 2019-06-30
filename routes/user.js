@@ -8,8 +8,11 @@ const bcrypt = require('bcryptjs')
 // login
 router.get('/login', (req, res) => {
   const message = []
-  message.push(req.session.messages)
-  showMessage = message[0][0]
+  let showMessage
+  if (req.session.messages) {
+    message.push(req.session.messages)
+    showMessage = message[0][0]
+  }
   res.render('login', { login_errors: showMessage || [] })
 })
 
