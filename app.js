@@ -5,6 +5,8 @@ const bodyPaser = require('body-parser')
 const exphbs = require('express-handlebars')
 const mongoose = require('mongoose')
 const methodOverride = require('method-override')
+const session = require('express-session')
+const passport = require('passport')
 const port = 3000
 
 // setup the app
@@ -12,6 +14,19 @@ app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 app.use(methodOverride('_method'))
 app.use(bodyPaser.urlencoded({ extended: true }))
+
+app.use(session({
+  secret: 'akpitdx'
+}))
+
+app.use(passport.initialize())
+app.use(passport.session())
+require('./config/passport.js')(passport)
+
+app.use((req, res, next) => {
+  res.locals.user = req.user
+  next()
+})
 
 // setting static files
 app.use(express.static('public'))
